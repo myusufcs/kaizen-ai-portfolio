@@ -28,7 +28,7 @@
     border:1px solid rgba(0,229,168,.35);background:rgba(0,229,168,.07);
     padding:5px 12px;border-radius:999px;margin-bottom:18px}
   h1{font-size:clamp(38px,7vw,64px);margin:0 0 10px;letter-spacing:-1px;line-height:1.05}
-  .tag{font-size:clamp(15px,2.4vw,19px);color:var(--muted);max-width:640px;margin:0 0 26px}
+  .tag{font-size:clamp(15px,2.4vw,19px);color:var(--muted);max-width:660px;margin:0 0 26px}
   .links{display:flex;flex-wrap:wrap;gap:10px}
   .btn{display:inline-block;padding:11px 20px;border-radius:11px;font-size:14.5px;font-weight:600;
     text-decoration:none;color:var(--text);border:1px solid var(--line);background:var(--card);
@@ -45,6 +45,10 @@
   .card .ico{font-size:22px;margin-bottom:8px}
   .card h3{margin:0 0 6px;font-size:16px}
   .card p{margin:0;font-size:14px;color:var(--muted)}
+  .stats{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+  .stat b{display:block;font-size:26px;letter-spacing:-.5px;color:var(--accent);line-height:1.2}
+  .stat span{font-size:12.5px;color:var(--muted)}
   .reel{display:flex;gap:26px;align-items:center;flex-wrap:wrap}
   .reel video{width:230px;border-radius:16px;border:1px solid var(--line);
     box-shadow:0 20px 50px rgba(0,0,0,.45)}
@@ -53,6 +57,9 @@
     font-size:13px;color:#cfe9e0}
   pre{background:rgba(0,0,0,.35);border:1px solid var(--line);border-radius:12px;
     padding:15px 16px;overflow:auto;font-size:12.8px;color:#cfe9e0}
+  .stack{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+  .chip{font-size:12.5px;color:#cfe9e0;border:1px solid var(--line);
+    background:rgba(255,255,255,.04);padding:4px 10px;border-radius:999px}
   footer{border-top:1px solid var(--line);margin-top:30px;padding:26px 0 44px;
     color:var(--muted);font-size:13.5px;text-align:center}
   a.plain{color:var(--accent);text-decoration:none}
@@ -68,7 +75,7 @@
     <p class="tag">
       Asisten AI yang jalan 24/7 di mesin sendiri. Dioperasikan lewat chat,
       buat ngurusin server operations, otomasi kerjaan berulang, dan analisis data
-      lintas sistem.
+      lintas sistem — dari satu laptop sampai ratusan node di lapangan.
     </p>
     <div class="links">
       <a class="btn primary" href="https://github.com/myusufcs/kaizen-ai-portfolio">Repo GitHub</a>
@@ -91,6 +98,18 @@
     </div>
   </section>
 
+  <section>
+    <h2>Skala Kerja</h2>
+    <div class="stats">
+      <div class="stat"><b>996</b><span>lokasi terindeks (Data Site)</span></div>
+      <div class="stat"><b>7.448</b><span>IP inventaris terpetakan</span></div>
+      <div class="stat"><b>680+</b><span>node dipantau kapasitasnya</span></div>
+      <div class="stat"><b>330</b><span>model LLM di satu gateway</span></div>
+      <div class="stat"><b>27</b><span>skill agent terpasang</span></div>
+      <div class="stat"><b>3 menit</b><span>interval alert kapasitas</span></div>
+    </div>
+  </section>
+
   <section id="kemampuan">
     <h2>Kemampuan</h2>
     <div class="grid">
@@ -105,6 +124,12 @@
         <h3>Server Operations</h3>
         <p>Memantau kesehatan layanan, kapasitas, dan konfigurasi; menindaklanjuti gangguan
            dengan urutan pemulihan yang terukur.</p>
+      </div>
+      <div class="card">
+        <div class="ico">📊</div>
+        <h3>Monitoring &amp; Alert</h3>
+        <p>Query metrik langsung ke API Grafana/Prometheus, bukan scraping dashboard yang
+           tabelnya dipaginasi. Ambang, jam operasional, dan anti-spam berbasis state.</p>
       </div>
       <div class="card">
         <div class="ico">🔐</div>
@@ -125,23 +150,42 @@
            layanan REST — jadi satu alur data yang bisa dipakai.</p>
       </div>
       <div class="card">
+        <div class="ico">📝</div>
+        <h3>Otomasi Form &amp; Dokumen</h3>
+        <p>Mengisi form internal (dropdown, radio, unggah) dari data mentah,
+           ambil snapshot bukti, lalu submit — dengan sesi yang dikelola sendiri.</p>
+      </div>
+      <div class="card">
         <div class="ico">🛡️</div>
         <h3>Uji Keamanan</h3>
-        <p>Pemindaian endpoint, review header keamanan, kontrol akses, sampai
-           uji kerentanan dasar (OWASP Top 10) pada aplikasi internal.</p>
+        <p>Pemindaian statis &amp; dinamis: Semgrep, CodeQL, audit rantai pasok,
+           penilaian CVSS, sampai review diff untuk perubahan kode.</p>
+      </div>
+      <div class="card">
+        <div class="ico">🧠</div>
+        <h3>Gateway Model</h3>
+        <p>Router multi-provider OpenAI-compatible: ratusan model, failover otomatis
+           saat kena rate-limit, satu key untuk semua agent.</p>
       </div>
     </div>
   </section>
 
   <section>
     <h2>Contoh Nyata</h2>
-<pre>$ ./netscan.py 127.0.0.0/30 --ports 22,6379,80 --banner
-127.0.0.1   up   22/ssh SSH-2.0-OpenSSH_10.2p1 Ubuntu, 6379/redis
+<pre>$ ./disk-watch.py
+682 lokasi terbaca, 3 di atas 79%
+→ WA  Location : District 8 Jakarta (100)
+       Disk Usage : 81.2%
 
-$ openclaw-backup
-lokal selesai: 8 backup tersimpan (retensi 14)
-offsite: terkirim ke KaizenAI:openclaw-backup (13M)
-offsite: retensi 30 hari diterapkan</pre>
+$ tembak 16m
+🔎 SSH OK (server-16m)
+📦 versi node v8.136.5 → dependencies: SKIP
+✅ agent jalan (PID 21488)
+
+$ ./jobstreet-watch.sh
+network engineer: 68 ditemukan, 1 baru
+auto: lamar 95679491 — Network Security Engineer
+auto:   ✅ terkirim (3/3 pertanyaan dijawab)</pre>
   </section>
 
   <section>
@@ -153,13 +197,35 @@ offsite: retensi 30 hari diterapkan</pre>
         <p>Nggak bisa menembus batas akses. Yang privat harus dikasih aksesnya dulu.</p></div>
       <div class="card"><h3>Patuh pada aturan pemilik</h3>
         <p>Perintah berbahaya (sudo, SSH, hapus data) dibatasi berlapis — bukan cuma di prompt.</p></div>
+      <div class="card"><h3>Ada yang tetap manual</h3>
+        <p>Login ber-2FA, captcha, dan ujian/keputusan resmi tetap di tangan manusia.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Perangkat</h2>
+    <div class="stack">
+      <span class="chip">Python</span>
+      <span class="chip">Bash</span>
+      <span class="chip">Node.js</span>
+      <span class="chip">Go</span>
+      <span class="chip">Linux</span>
+      <span class="chip">systemd</span>
+      <span class="chip">Docker</span>
+      <span class="chip">PostgreSQL</span>
+      <span class="chip">Playwright</span>
+      <span class="chip">Prometheus / Grafana</span>
+      <span class="chip">ZeroTier</span>
+      <span class="chip">Semgrep / CodeQL</span>
+      <span class="chip">ffmpeg</span>
+      <span class="chip">Command Code CLI</span>
     </div>
   </section>
 
   <footer>
     ⛩️ <strong>Kaizen</strong> — dibangun &amp; dioperasikan oleh
     <strong>M Yusuf Chairul Saleh</strong><br>
-    <span style="font-size:12.5px">OpenClaw · Command Code CLI · Python · Linux · systemd</span>
+    <span style="font-size:12.5px">Command Code CLI · Python · Linux · systemd · Docker</span>
   </footer>
 </div>
 
